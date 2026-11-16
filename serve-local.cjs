@@ -2,6 +2,8 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const root = path.resolve(__dirname, 'dist');
+const port = Number(process.env.PORT || 8787);
+const host = process.env.HOST || (process.env.PORT ? '0.0.0.0' : '127.0.0.1');
 const types = {'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.png':'image/png','.mp3':'audio/mpeg'};
 const server = http.createServer((req,res)=>{
   if (!['GET','HEAD'].includes(req.method)) {res.writeHead(405);res.end();return;}
@@ -28,8 +30,8 @@ const server = http.createServer((req,res)=>{
 });
 server.on('error', error => {
   console.error(error.code === 'EADDRINUSE'
-    ? 'El puerto 8787 ya esta en uso. Revisa si la pagina ya esta abierta en http://127.0.0.1:8787.'
+    ? `El puerto ${port} ya esta en uso. Revisa si el servidor ya esta iniciado.`
     : `No se pudo iniciar el servidor: ${error.message}`);
   process.exitCode = 1;
 });
-server.listen(8787,'127.0.0.1',()=>console.log('Valentina: http://127.0.0.1:8787'));
+server.listen(port, host, () => console.log(`Valentina: http://${host}:${server.address().port}`));

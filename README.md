@@ -41,3 +41,11 @@ cloudflared tunnel --url http://127.0.0.1:8787
 Cloudflare mostrará un enlace público temporal. El servidor y el túnel deben permanecer activos para que funcione. Al crear un túnel nuevo, el enlace puede cambiar.
 
 Los registros y los identificadores de procesos locales se excluyen de Git mediante `.gitignore`.
+
+## Desplegar en Railway
+
+El archivo `railway.json` configura `npm start` y la comprobación HTTP de `/`. El servicio debe usar la raíz del repositorio, donde están `package.json` y `serve-local.cjs`.
+
+Railway proporciona la variable `PORT`. Cuando está definida, el servidor usa ese puerto y escucha en `0.0.0.0`. Sin `PORT`, mantiene la dirección local `127.0.0.1:8787`. La variable opcional `HOST` permite cambiar explícitamente la dirección de escucha.
+
+Conectar `Davius07/Love`, seleccionar la rama `main` y generar un dominio público en la configuración de red del servicio. El puerto de destino del dominio debe coincidir con el puerto del servidor.
