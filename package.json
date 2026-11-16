@@ -1,0 +1,13 @@
+{
+  "name": "para-valentina",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Pagina para Valentina y servidor local sin dependencias externas.",
+  "scripts": {
+    "start": "node serve-local.cjs",
+    "check": "node --check serve-local.cjs && node --check dist/effects.js && node --check dist/music.js && node --check dist/reasons.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
